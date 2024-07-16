@@ -54,7 +54,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   capped_progress_indicator: ^0.0.2
   firebase_storage: ^11.6.9
-  connectivity_plus: ^6.0.3
+  connectivity_plus: ^4.0.1
 
   #--------------- ./ PACKAGES END ------------------#
 
