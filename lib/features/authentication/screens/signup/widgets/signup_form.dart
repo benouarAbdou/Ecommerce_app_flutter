@@ -1,7 +1,9 @@
+import 'package:ecommerce/features/authentication/screens/signup/verify_email.dart';
 import 'package:ecommerce/features/authentication/screens/signup/widgets/signup_termsconditions.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class TSignupForm extends StatelessWidget {
@@ -15,24 +17,24 @@ class TSignupForm extends StatelessWidget {
       child: Column(
         children: [
           //first last name
-          const Row(
+          Row(
             children: [
               Expanded(
-                child: TextField(
+                child: TextFormField(
                   expands: false,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: TTexts.firstName,
                     prefixIcon: Icon(Iconsax.user),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: TSizes.spaceBtwInputFields,
               ),
               Expanded(
-                child: TextField(
+                child: TextFormField(
                   expands: false,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: TTexts.lastName,
                     prefixIcon: Icon(Iconsax.user),
                   ),
@@ -44,9 +46,9 @@ class TSignupForm extends StatelessWidget {
             height: TSizes.spaceBtwInputFields,
           ),
           //username
-          const TextField(
+          TextFormField(
             expands: false,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: TTexts.username,
               prefixIcon: Icon(Iconsax.user_edit),
             ),
@@ -55,9 +57,9 @@ class TSignupForm extends StatelessWidget {
             height: TSizes.spaceBtwInputFields,
           ),
           //phone
-          const TextField(
+          TextFormField(
             expands: false,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: TTexts.phoneNo,
               prefixIcon: Icon(Iconsax.call),
             ),
@@ -66,9 +68,9 @@ class TSignupForm extends StatelessWidget {
           const SizedBox(
             height: TSizes.spaceBtwInputFields,
           ),
-          const TextField(
+          TextFormField(
             obscureText: true,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: TTexts.password,
               prefixIcon: Icon(Iconsax.password_check),
               suffixIcon: Icon(Iconsax.eye_slash),
@@ -88,7 +90,7 @@ class TSignupForm extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () => Get.to(() => const VerifyEmailScreen()),
               child: const Text(TTexts.createAccount),
             ),
           )
