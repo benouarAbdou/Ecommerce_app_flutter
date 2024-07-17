@@ -1,5 +1,3 @@
-import 'package:ecommerce/common/widgets/success_screen/success_screen.dart';
-import 'package:ecommerce/features/authentication/screens/login/login.dart';
 import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/constants/text_strings.dart';
