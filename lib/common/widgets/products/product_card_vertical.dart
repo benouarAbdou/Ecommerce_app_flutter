@@ -3,6 +3,7 @@ import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_image_
 import 'package:ecommerce/common/widgets/icons/tcircular_icon.dart';
 import 'package:ecommerce/common/widgets/texts/product_price.dart';
 import 'package:ecommerce/common/widgets/texts/product_title.dart';
+import 'package:ecommerce/common/widgets/texts/tbrand_title_with_verification.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
@@ -81,23 +82,8 @@ class TProductCardVertical extends StatelessWidget {
                   const SizedBox(
                     height: TSizes.spaceBtwItems / 2,
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        "Nike",
-                        style: Theme.of(context).textTheme.labelMedium!,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                      const SizedBox(
-                        width: TSizes.xs,
-                      ),
-                      const Icon(
-                        Iconsax.verify,
-                        color: TColors.primary,
-                        size: TSizes.iconXs,
-                      )
-                    ],
+                  const TBrandTitleWithVerification(
+                    title: 'Nike',
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

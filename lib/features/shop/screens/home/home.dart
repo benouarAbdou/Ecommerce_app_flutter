@@ -81,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                           height: TSizes.spaceBtwItems,
                         ),
                         SizedBox(
-                          height: 80,
+                          height: 90,
                           child: ListView.builder(
                               shrinkWrap: true,
                               itemCount: 6,
