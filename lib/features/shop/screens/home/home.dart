@@ -1,9 +1,6 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/common/widgets/appbar/appbar.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/category_image_text_container.dart';
-import 'package:ecommerce/common/widgets/custom_shapes/containers/circular_container.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/primary_header_container.dart';
-import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_image_container.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:ecommerce/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommerce/common/widgets/products/cart_menu_icon.dart';
@@ -14,10 +11,7 @@ import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/constants/text_strings.dart';
-import 'package:ecommerce/utils/device/device_utility.dart';
-import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
