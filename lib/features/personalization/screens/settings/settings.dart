@@ -4,10 +4,12 @@ import 'package:ecommerce/common/widgets/custom_shapes/containers/profile_tile.d
 import 'package:ecommerce/common/widgets/custom_shapes/containers/setting_menu_tile.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/tcircular_image.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
+import 'package:ecommerce/features/personalization/screens/profile/profile.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -31,7 +33,9 @@ class SettingsScreen extends StatelessWidget {
                           .apply(color: TColors.white),
                     ),
                   ),
-                  const TUserProfileTile(),
+                  TUserProfileTile(
+                    onPressed: () => Get.to(() => const ProfileScreen()),
+                  ),
                   const SizedBox(
                     height: TSizes.spaceBtwSections,
                   ),
