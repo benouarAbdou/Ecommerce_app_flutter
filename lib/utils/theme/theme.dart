@@ -14,7 +14,7 @@ class EcommerceTheme {
   EcommerceTheme._();
 
   static ThemeData lightTheme = ThemeData(
-    useMaterial3: false,
+    useMaterial3: true,
     fontFamily: 'Poppins',
     disabledColor: TColors.grey,
     brightness: Brightness.light,
@@ -31,7 +31,7 @@ class EcommerceTheme {
   );
 
   static ThemeData darkTheme = ThemeData(
-    useMaterial3: false,
+    useMaterial3: true,
     fontFamily: 'Poppins',
     disabledColor: TColors.grey,
     brightness: Brightness.dark,

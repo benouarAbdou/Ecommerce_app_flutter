@@ -30,7 +30,7 @@ class TCircularIcon extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100),
+          shape: BoxShape.circle,
           color: backgroundColor != null
               ? backgroundColor!
               : dark

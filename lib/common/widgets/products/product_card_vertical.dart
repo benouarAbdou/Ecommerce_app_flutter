@@ -4,11 +4,13 @@ import 'package:ecommerce/common/widgets/icons/tcircular_icon.dart';
 import 'package:ecommerce/common/widgets/texts/product_price.dart';
 import 'package:ecommerce/common/widgets/texts/product_title.dart';
 import 'package:ecommerce/common/widgets/texts/tbrand_title_with_verification.dart';
+import 'package:ecommerce/features/shop/screens/product_details/product_details.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class TProductCardVertical extends StatelessWidget {
@@ -19,7 +21,7 @@ class TProductCardVertical extends StatelessWidget {
     final dark = THelperFunctions.isDarkMode(context);
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => const ProductDetails()),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),
@@ -31,7 +33,7 @@ class TProductCardVertical extends StatelessWidget {
             //thumbnail
             TRoundedContainer(
               height: 180,
-              padding: const EdgeInsets.all(TSizes.sm),
+              padding: const EdgeInsets.all(1),
               backgroundColor: dark ? TColors.dark : TColors.light,
               child: Stack(children: [
                 const TRoundedImage(
