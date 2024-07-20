@@ -1,14 +1,12 @@
 import 'package:ecommerce/common/widgets/appbar/appbar.dart';
 import 'package:ecommerce/common/widgets/products/rating_bar_indicator.dart';
 import 'package:ecommerce/features/shop/screens/product_reviews/widgets/overall_product_rating.dart';
-import 'package:ecommerce/features/shop/screens/product_reviews/widgets/progress_indicator_rating.dart';
+
 import 'package:ecommerce/features/shop/screens/product_reviews/widgets/user_review_card.dart';
-import 'package:ecommerce/utils/constants/colors.dart';
+
 import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/utils/device/device_utility.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class ProductReviesScreen extends StatelessWidget {
   const ProductReviesScreen({super.key});
