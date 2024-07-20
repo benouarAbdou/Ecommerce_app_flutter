@@ -46,9 +46,8 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    actions: [
+                    actions: const [
                       TCartCounterIcon(
-                        onPressed: () {},
                         iconColor: TColors.white,
                       )
                     ],
