@@ -4,10 +4,11 @@ import 'package:ecommerce/features/shop/screens/product_details/widgets/product_
 import 'package:ecommerce/features/shop/screens/product_details/widgets/product_metadata.dart';
 import 'package:ecommerce/features/shop/screens/product_details/widgets/rating_share.dart';
 import 'package:ecommerce/features/shop/screens/product_details/widgets/product_details_image_slider.dart';
+import 'package:ecommerce/features/shop/screens/product_reviews/product_reviews.dart';
 
 import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
 
 class ProductDetails extends StatelessWidget {
@@ -15,7 +16,6 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
     return Scaffold(
       bottomNavigationBar: const TBottomAddToCart(),
       body: SingleChildScrollView(
@@ -75,7 +75,8 @@ class ProductDetails extends StatelessWidget {
                         showActionButton: false,
                       ),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () =>
+                              Get.to(() => const ProductReviesScreen()),
                           icon: const Icon(
                             Icons.arrow_forward_ios,
                             size: 18,
