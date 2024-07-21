@@ -46,7 +46,7 @@ class StoreScreen extends StatelessWidget {
                           padding: EdgeInsets.zero,
                         ),
                         const SizedBox(
-                          height: TSizes.spaceBtwSections,
+                          height: TSizes.spaceBtwSections / 2,
                         ),
                         TSectionHeader(
                           title: 'Featured brands',

@@ -27,21 +27,24 @@ class TProductCardVertical extends StatelessWidget {
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(TSizes.productImageRadius),
-            color: dark ? TColors.darkGrey : TColors.white),
+            color: dark ? TColors.darkerGrey : TColors.white),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //thumbnail
             TRoundedContainer(
               height: 180,
-              padding: const EdgeInsets.all(1),
+              padding: const EdgeInsets.all(TSizes.sm),
               backgroundColor: dark ? TColors.dark : TColors.light,
               child: Stack(children: [
-                const TRoundedImage(
-                  imageUrl: TImages.productImage1,
+                TRoundedImage(
+                  width: double.infinity,
+                  backgroundColor: dark ? TColors.dark : TColors.light,
+                  imageUrl: TImages.productImage21,
                   applyImageRadius: true,
                 ),
                 Positioned(
-                  top: 12,
+                  top: 10,
                   child: TRoundedContainer(
                     radius: TSizes.sm,
                     backgroundColor: TColors.secondary.withOpacity(0.8),
@@ -64,7 +67,7 @@ class TProductCardVertical extends StatelessWidget {
                     icon: Iconsax.heart,
                     color: Colors.red,
                   ),
-                )
+                ),
               ]),
             ),
             const SizedBox(
@@ -72,49 +75,52 @@ class TProductCardVertical extends StatelessWidget {
             ),
 
             //details
-            Padding(
-              padding: const EdgeInsets.only(left: TSizes.sm),
+            const Padding(
+              padding: EdgeInsets.only(left: TSizes.sm),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const TProductTitleText(
+                  TProductTitleText(
                     title: 'Air jordan shoes',
                     smallSize: true,
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: TSizes.spaceBtwItems / 2,
                   ),
-                  const TBrandTitleWithVerification(
+                  TBrandTitleWithVerification(
                     title: 'Nike',
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const TProductPriceText(
-                        price: '35.5',
-                      ),
-                      Container(
-                        decoration: const BoxDecoration(
-                            color: TColors.dark,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(TSizes.cardRadiusMd),
-                              bottomRight:
-                                  Radius.circular(TSizes.productImageRadius),
-                            )),
-                        child: const SizedBox(
-                            width: TSizes.iconLg * 1.2,
-                            height: TSizes.iconLg * 1.2,
-                            child: Center(
-                              child: Icon(
-                                Icons.add,
-                                color: TColors.white,
-                              ),
-                            )),
-                      )
-                    ],
-                  )
                 ],
               ),
+            ),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: TSizes.sm),
+                  child: TProductPriceText(
+                    price: '35.5',
+                  ),
+                ),
+                Container(
+                  decoration: const BoxDecoration(
+                      color: TColors.dark,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(TSizes.cardRadiusMd),
+                        bottomRight: Radius.circular(TSizes.productImageRadius),
+                      )),
+                  child: const SizedBox(
+                      width: TSizes.iconLg * 1.2,
+                      height: TSizes.iconLg * 1.2,
+                      child: Center(
+                        child: Icon(
+                          Icons.add,
+                          color: TColors.white,
+                        ),
+                      )),
+                )
+              ],
             )
           ],
         ),
