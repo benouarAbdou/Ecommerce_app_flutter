@@ -1,5 +1,4 @@
 import 'package:ecommerce/common/widgets/custom_shapes/containers/choice_chip.dart';
-import 'package:ecommerce/common/widgets/custom_shapes/containers/circular_container.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:ecommerce/common/widgets/texts/product_price.dart';
 import 'package:ecommerce/common/widgets/texts/product_title.dart';
