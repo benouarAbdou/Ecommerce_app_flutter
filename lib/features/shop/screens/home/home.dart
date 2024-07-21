@@ -6,6 +6,7 @@ import 'package:ecommerce/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommerce/common/widgets/products/cart_menu_icon.dart';
 import 'package:ecommerce/common/widgets/products/product_card_vertical.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
+import 'package:ecommerce/features/shop/screens/all_products/all_products.dart';
 import 'package:ecommerce/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:ecommerce/features/shop/screens/sub_category/sub_category.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
@@ -117,7 +118,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   TSectionHeader(
                     title: 'Popular Products',
-                    onPressed: () {},
+                    onPressed: () => Get.to(() => const AllProducts()),
                   ),
                   const SizedBox(
                     height: TSizes.spaceBtwItems,
