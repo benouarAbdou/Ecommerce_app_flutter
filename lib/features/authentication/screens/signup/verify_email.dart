@@ -1,5 +1,5 @@
-import 'package:ecommerce/common/widgets/success_screen/success_screen.dart';
-import 'package:ecommerce/features/authentication/screens/login/login.dart';
+import 'package:ecommerce/data/repositories/auth/auth_repo.dart';
+import 'package:ecommerce/features/authentication/controllers/signup/verify_email_controller.dart';
 import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/constants/text_strings.dart';
@@ -9,16 +9,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class VerifyEmailScreen extends StatelessWidget {
-  const VerifyEmailScreen({super.key});
+  const VerifyEmailScreen({super.key, this.email});
+
+  final String? email;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(VerifyEmailController());
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-              onPressed: () => Get.off(() => const LoginScreen()),
+              onPressed: () => AuthenticationRepository.instance.logout(),
               icon: const Icon(CupertinoIcons.clear))
         ],
       ),
@@ -45,7 +48,7 @@ class VerifyEmailScreen extends StatelessWidget {
                 height: TSizes.spaceBtwItems,
               ),
               Text(
-                "abdouoran378@gmail.com",
+                email ?? '',
                 style: Theme.of(context).textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
@@ -61,26 +64,20 @@ class VerifyEmailScreen extends StatelessWidget {
               const SizedBox(
                 height: TSizes.spaceBtwSections,
               ),
-              SizedBox(
+              /*SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () => Get.to(() => SuccessScreen(
-                      image: TImages.staticSuccessIllustration,
-                      title: TTexts.yourAccountCreatedTitle,
-                      subtitle: TTexts.yourAccountCreatedSubTitle,
-                      onPressed: () => Get.to(
-                            () => const LoginScreen(),
-                          ))),
+                  onPressed: () => controller.checkEmailVerified(),
                   child: const Text(TTexts.tContinue),
                 ),
               ),
               const SizedBox(
                 height: TSizes.spaceBtwItems,
-              ),
+              ),*/
               SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () => controller.sendEmailVerification(),
                   child: const Text(TTexts.resendEmail),
                 ),
               )

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:ecommerce/data/repositories/auth/auth_repo.dart';
 import 'package:ecommerce/data/repositories/user/user_repo.dart';
 import 'package:ecommerce/features/authentication/models/user.dart';
@@ -45,6 +43,8 @@ class SignupController extends GetxController {
         TLoaders.warningSnackBar(
             title: "Accept privacy policy",
             message: "please accept our privacy policy");
+        TFullScreenLoader.stopLoading();
+
         return;
       }
 
@@ -65,9 +65,9 @@ class SignupController extends GetxController {
 
       TFullScreenLoader.stopLoading();
 
-      TLoaders.successSnackBar(title: 'Yay', message: "Account created");
-
-      Get.to(() => const VerifyEmailScreen());
+      Get.to(() => VerifyEmailScreen(
+            email: email.text.trim(),
+          ));
     } catch (e) {
       TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Oh snap', message: e.toString());
