@@ -55,6 +55,7 @@ dependencies:
   capped_progress_indicator: ^0.0.2
   firebase_storage: ^11.6.9
   connectivity_plus: ^4.0.1
+  firebase_core: ^2.27.0
 
   #--------------- ./ PACKAGES END ------------------#
 
