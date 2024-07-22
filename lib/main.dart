@@ -1,5 +1,5 @@
+import 'package:ecommerce/bindings/general_bindings.dart';
 import 'package:ecommerce/data/repositories/auth/auth_repo.dart';
-import 'package:ecommerce/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:ecommerce/firebase_options.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/theme/theme.dart';
@@ -34,6 +34,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialBinding: GeneralBindings(),
       themeMode: ThemeMode.system,
       theme: EcommerceTheme.lightTheme,
       darkTheme: EcommerceTheme.darkTheme,
