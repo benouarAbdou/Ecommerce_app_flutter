@@ -1,4 +1,5 @@
 import 'package:ecommerce/data/repositories/auth/auth_repo.dart';
+import 'package:ecommerce/features/personalization/controllers/user_controller.dart';
 import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/network/networkManager.dart';
 import 'package:ecommerce/utils/popups/loaders.dart';
@@ -14,12 +15,13 @@ class LoginController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  final userController = Get.put(UserController());
 
   @override
   void onInit() {
     // TODO: implement onInit
-    email.text = localStorage.read("remember_email");
-    password.text = localStorage.read("remember_password");
+    email.text = localStorage.read("remember_email") ?? '';
+    password.text = localStorage.read("remember_password") ?? '';
     super.onInit();
   }
 
@@ -58,6 +60,33 @@ class LoginController extends GetxController {
       TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Oh snap', message: e.toString());
       //something,
+    }
+  }
+
+  Future<void> googleSignIn() async {
+    try {
+      TFullScreenLoader.openLoadingDialog(
+          "Signing in", TImages.onBoardingImage1);
+
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        TFullScreenLoader.stopLoading();
+        TLoaders.errorSnackBar(
+            title: 'oops', message: "Check your internet connexion");
+        return;
+      }
+
+      final userCredentials =
+          await AuthenticationRepository.instance.signInWithGoogle();
+
+      await userController.saveUserRecord(userCredentials);
+
+      TFullScreenLoader.stopLoading();
+
+      AuthenticationRepository.instance.ScreenRedirect();
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'Oh snap', message: e.toString());
+      TFullScreenLoader.stopLoading();
     }
   }
 }
