@@ -1,18 +1,16 @@
-import 'package:ecommerce/common/widgets/appbar/appbar.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/category_image_text_container.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:ecommerce/common/widgets/layouts/grid_layout.dart';
-import 'package:ecommerce/common/widgets/products/cart_menu_icon.dart';
 import 'package:ecommerce/common/widgets/products/product_card_vertical.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
 import 'package:ecommerce/features/shop/screens/all_products/all_products.dart';
 import 'package:ecommerce/features/shop/screens/home/widgets/promo_slider.dart';
+import 'package:ecommerce/features/shop/screens/home/widgets/thome_appbar.dart';
 import 'package:ecommerce/features/shop/screens/sub_category/sub_category.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,32 +27,7 @@ class HomeScreen extends StatelessWidget {
             TPrimaryHeaderContainer(
               child: Column(
                 children: [
-                  TAppBar(
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          TTexts.homeAppbarTitle,
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelMedium!
-                              .apply(color: TColors.grey),
-                        ),
-                        Text(
-                          TTexts.homeAppbarSubTitle,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .apply(color: TColors.white),
-                        ),
-                      ],
-                    ),
-                    actions: const [
-                      TCartCounterIcon(
-                        iconColor: TColors.white,
-                      )
-                    ],
-                  ),
+                  const THomeAppBar(),
                   const SizedBox(
                     height: TSizes.spaceBtwSections,
                   ),
