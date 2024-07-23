@@ -5,6 +5,7 @@ import 'package:ecommerce/common/widgets/custom_shapes/containers/tbrand_card.da
 import 'package:ecommerce/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommerce/common/widgets/products/cart_menu_icon.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
+import 'package:ecommerce/features/shop/controllers/category_controller.dart';
 import 'package:ecommerce/features/shop/screens/all_brands/all_brands.dart';
 import 'package:ecommerce/features/shop/screens/store/widgets/category_tab.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
@@ -18,8 +19,9 @@ class StoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final categories = CategoryController.instance.featuredCategories;
     return DefaultTabController(
-      length: 5,
+      length: categories.length,
       child: Scaffold(
         appBar: TAppBar(
           title: Text(
@@ -69,25 +71,14 @@ class StoreScreen extends StatelessWidget {
                     ),
                   ),
                   //tabs
-                  bottom: const TTabBar(
-                    tabs: [
-                      Tab(
-                        child: Text("Sports"),
-                      ),
-                      Tab(
-                        child: Text("Fourniture"),
-                      ),
-                      Tab(
-                        child: Text("Electronics"),
-                      ),
-                      Tab(
-                        child: Text("Clothes"),
-                      ),
-                      Tab(
-                        child: Text("Cosmetics"),
-                      ),
-                    ],
-                  ),
+                  bottom: TTabBar(
+                      tabs: categories
+                          .map(
+                            (element) => Tab(
+                              child: Text(element.name),
+                            ),
+                          )
+                          .toList()),
                   automaticallyImplyLeading: false,
                   expandedHeight: 440,
                   pinned: true,
@@ -97,15 +88,14 @@ class StoreScreen extends StatelessWidget {
                       : TColors.white),
             ];
           },
-          body: const TabBarView(
-            children: [
-              CategoryTab(),
-              CategoryTab(),
-              CategoryTab(),
-              CategoryTab(),
-              CategoryTab(),
-            ],
-          ),
+          body: TabBarView(
+              children: categories
+                  .map(
+                    (element) => CategoryTab(
+                      category: element,
+                    ),
+                  )
+                  .toList()),
         ),
       ),
     );

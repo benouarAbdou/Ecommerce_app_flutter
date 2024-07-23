@@ -1,13 +1,12 @@
-import 'package:ecommerce/common/widgets/custom_shapes/containers/category_image_text_container.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:ecommerce/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommerce/common/widgets/products/product_card_vertical.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
 import 'package:ecommerce/features/shop/screens/all_products/all_products.dart';
+import 'package:ecommerce/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:ecommerce/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:ecommerce/features/shop/screens/home/widgets/thome_appbar.dart';
-import 'package:ecommerce/features/shop/screens/sub_category/sub_category.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
@@ -24,50 +23,36 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             //header
-            TPrimaryHeaderContainer(
+            const TPrimaryHeaderContainer(
               child: Column(
                 children: [
-                  const THomeAppBar(),
-                  const SizedBox(
+                  THomeAppBar(),
+                  SizedBox(
                     height: TSizes.spaceBtwSections,
                   ),
-                  const TSearchContainer(
+                  TSearchContainer(
                     text: "Search in store",
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: TSizes.spaceBtwSections,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: TSizes.defaultSpace),
+                    padding: EdgeInsets.only(left: TSizes.defaultSpace),
                     child: Column(
                       children: [
-                        const TSectionHeader(
+                        TSectionHeader(
                           title: 'Popular categories',
                           showActionButton: false,
                           textColor: TColors.white,
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: TSizes.spaceBtwItems,
                         ),
-                        SizedBox(
-                          height: 90,
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: 6,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (_, index) {
-                                return TVerticalImageText(
-                                  image: TImages.shoeIcon,
-                                  title: 'Shoes',
-                                  onTap: () =>
-                                      Get.to(() => const SubCategoriesScreen()),
-                                );
-                              }),
-                        ),
+                        THomeCategories(),
                       ],
                     ),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: TSizes.spaceBtwSections,
                   )
                 ],
