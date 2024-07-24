@@ -36,7 +36,7 @@ class BrandProducts extends StatelessWidget {
                 height: TSizes.spaceBtwItems,
               ),
               FutureBuilder<List<ProductModel>>(
-                future: controller.getBrandsProducts(brand.id),
+                future: controller.getBrandsProducts(brandId: brand.id),
                 builder: (context, snapshot) {
                   // Use the TCloudHelperFunctions to handle different states
                   final widget = TCloudHelperFunctions.checkMultiRecordState(

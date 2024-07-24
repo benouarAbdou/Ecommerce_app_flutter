@@ -23,7 +23,7 @@ class AllProducts extends StatelessWidget {
       appBar: TAppBar(
         showBackArrow: true,
         title: Text(
-          'Popular Products',
+          title,
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
