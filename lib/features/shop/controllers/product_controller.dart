@@ -33,6 +33,16 @@ class ProductController extends GetxController {
     }
   }
 
+  Future<List<ProductModel>> fetchAllFeaturedProducts() async {
+    try {
+      final products = await productRepo.getAllFeaturedProducts();
+      return products;
+    } catch (e) {
+      TLoaders.errorSnackBar(title: "Oh Snap!", message: e.toString());
+      return [];
+    }
+  }
+
   String getProductPrice(ProductModel product) {
     return (product.salePrice > 0 ? product.salePrice : product.price)
         .toString();

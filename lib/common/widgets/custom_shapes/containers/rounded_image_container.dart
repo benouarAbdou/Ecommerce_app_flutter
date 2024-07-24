@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -46,12 +47,19 @@ class TRoundedImage extends StatelessWidget {
           borderRadius: applyImageRadius!
               ? BorderRadius.circular(borderRadius)
               : BorderRadius.zero,
-          child: Image(
-            image: isNetworkImage!
-                ? NetworkImage(imageUrl)
-                : AssetImage(imageUrl) as ImageProvider,
-            fit: BoxFit.contain,
-          ),
+          child: isNetworkImage!
+              ? CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  fit: fit,
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  placeholder: (context, url) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                )
+              : Image(
+                  image: AssetImage(imageUrl),
+                  fit: fit,
+                ),
         ),
       ),
     );
