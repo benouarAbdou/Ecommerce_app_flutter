@@ -23,7 +23,9 @@ class ProductDetails extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const TProductImageSlider(),
+            TProductImageSlider(
+              product: product,
+            ),
             Padding(
               padding: const EdgeInsets.only(
                   right: TSizes.defaultSpace,
@@ -32,7 +34,9 @@ class ProductDetails extends StatelessWidget {
               child: Column(
                 children: [
                   const TRatingAndShare(),
-                  const ProductMetaData(),
+                  ProductMetaData(
+                    product: product,
+                  ),
                   //const TProductsAttributes(),
                   const SizedBox(
                     height: TSizes.spaceBtwSections,
@@ -54,16 +58,17 @@ class ProductDetails extends StatelessWidget {
                   const SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),
-                  const ReadMoreText(
-                    "This aa product description , im just writing anything that comes to my mind just to make it appear long you know ,a nyways im done , i guess",
+                  ReadMoreText(
+                    product.description ?? '',
                     trimLines: 2,
                     trimMode: TrimMode.Line,
+                    textAlign: TextAlign.start,
                     trimCollapsedText: ' Show More',
                     trimExpandedText: " Show Less",
-                    moreStyle:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
-                    lessStyle:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                    moreStyle: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w800),
+                    lessStyle: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w800),
                   ),
                   const Divider(),
                   const SizedBox(
