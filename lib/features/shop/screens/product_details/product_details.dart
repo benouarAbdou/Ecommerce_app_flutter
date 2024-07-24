@@ -1,6 +1,6 @@
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
+import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/features/shop/screens/product_details/widgets/bottom_add_to_cart.dart';
-import 'package:ecommerce/features/shop/screens/product_details/widgets/product_attributes.dart';
 import 'package:ecommerce/features/shop/screens/product_details/widgets/product_metadata.dart';
 import 'package:ecommerce/features/shop/screens/product_details/widgets/rating_share.dart';
 import 'package:ecommerce/features/shop/screens/product_details/widgets/product_details_image_slider.dart';
@@ -12,7 +12,9 @@ import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
 
 class ProductDetails extends StatelessWidget {
-  const ProductDetails({super.key});
+  const ProductDetails({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class ProductDetails extends StatelessWidget {
                 children: [
                   const TRatingAndShare(),
                   const ProductMetaData(),
-                  const TProductsAttributes(),
+                  //const TProductsAttributes(),
                   const SizedBox(
                     height: TSizes.spaceBtwSections,
                   ),
@@ -53,7 +55,7 @@ class ProductDetails extends StatelessWidget {
                     height: TSizes.spaceBtwItems,
                   ),
                   const ReadMoreText(
-                    "This a product description , im just writing anything that comes to my mind just to make it appear long you know ,a nyways im done , i guess",
+                    "This aa product description , im just writing anything that comes to my mind just to make it appear long you know ,a nyways im done , i guess",
                     trimLines: 2,
                     trimMode: TrimMode.Line,
                     trimCollapsedText: ' Show More',

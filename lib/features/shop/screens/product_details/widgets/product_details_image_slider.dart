@@ -1,5 +1,4 @@
 import 'package:ecommerce/common/widgets/appbar/appbar.dart';
-import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_image_container.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
 import 'package:ecommerce/common/widgets/icons/tcircular_icon.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
@@ -21,9 +20,9 @@ class TProductImageSlider extends StatelessWidget {
     return TCurvedEdgeWidget(
       child: Container(
         color: dark ? TColors.darkGrey : TColors.light,
-        child: Stack(
+        child: const Stack(
           children: [
-            const SizedBox(
+            SizedBox(
               height: 400,
               child: Padding(
                 padding: EdgeInsets.all(TSizes.productImageRadius * 2),
@@ -31,7 +30,7 @@ class TProductImageSlider extends StatelessWidget {
                     child: Image(image: AssetImage(TImages.productImage5))),
               ),
             ),
-            Positioned(
+            /*Positioned(
               right: 0,
               bottom: 30,
               left: TSizes.defaultSpace,
@@ -54,8 +53,8 @@ class TProductImageSlider extends StatelessWidget {
                   itemCount: 6,
                 ),
               ),
-            ),
-            const TAppBar(
+            ),*/
+            TAppBar(
               showBackArrow: true,
               actions: [
                 TCircularIcon(

@@ -3,6 +3,7 @@ import 'package:ecommerce/common/widgets/custom_shapes/containers/search_contain
 import 'package:ecommerce/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommerce/common/widgets/products/product_card_vertical.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
+import 'package:ecommerce/features/shop/controllers/product_controller.dart';
 import 'package:ecommerce/features/shop/screens/all_products/all_products.dart';
 import 'package:ecommerce/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:ecommerce/features/shop/screens/home/widgets/promo_slider.dart';
@@ -17,6 +18,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -74,11 +76,23 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),
-                  TGridLayout(
-                    itemCount: 4,
-                    itemBuilder: (BuildContext, int) =>
-                        const TProductCardVertical(),
-                  )
+                  Obx(() {
+                    if (controller.isLoading.value) {
+                      return const CircularProgressIndicator();
+                    }
+                    if (controller.featuredProducts.isEmpty) {
+                      return const Center(
+                        child: Text("No products to show"),
+                      );
+                    }
+                    return TGridLayout(
+                      itemCount: controller.featuredProducts.length,
+                      itemBuilder: (BuildContext, index) =>
+                          TProductCardVertical(
+                        product: controller.featuredProducts[index],
+                      ),
+                    );
+                  })
                 ],
               ),
             ),
