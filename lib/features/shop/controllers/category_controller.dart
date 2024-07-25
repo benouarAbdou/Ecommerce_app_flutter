@@ -48,7 +48,17 @@ class CategoryController extends GetxController {
   }
 
 //load category
-
+  Future<List<CategoryModel>> getSubCategories(
+    String categoryId,
+  ) async {
+    try {
+      final subCategories = await categoryRepo.getSubCategories(categoryId);
+      return subCategories;
+    } catch (e) {
+      TLoaders.errorSnackBar(title: "Oh Snap!", message: e.toString());
+      return [];
+    }
+  }
 //sub category
 
   Future<List<ProductModel>> getCategoryProducts(
@@ -59,6 +69,7 @@ class CategoryController extends GetxController {
       return products;
     } catch (e) {
       TLoaders.errorSnackBar(title: "Oh Snap!", message: e.toString());
+      print(e.toString());
       return [];
     }
   }

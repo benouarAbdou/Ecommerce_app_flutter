@@ -4,18 +4,24 @@ import 'package:ecommerce/common/widgets/icons/favourite_icon.dart';
 import 'package:ecommerce/common/widgets/texts/product_price.dart';
 import 'package:ecommerce/common/widgets/texts/product_title.dart';
 import 'package:ecommerce/common/widgets/texts/tbrand_title_with_verification.dart';
+import 'package:ecommerce/features/shop/controllers/product_controller.dart';
+import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
-import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class TProductCardHorizontal extends StatelessWidget {
-  const TProductCardHorizontal({super.key});
+  const TProductCardHorizontal({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
+    final controller = ProductController.instance;
+    final salePrct =
+        controller.calculateSalePercentage(product.price, product.salePrice);
 
     return Container(
       width: 310,
@@ -36,7 +42,8 @@ class TProductCardHorizontal extends StatelessWidget {
                   width: 120,
                   child: TRoundedImage(
                     backgroundColor: dark ? TColors.dark : TColors.light,
-                    imageUrl: TImages.productImage1,
+                    imageUrl: product.thumbnail,
+                    isNetworkImage: true,
                     applyImageRadius: true,
                   ),
                 ),
@@ -48,7 +55,7 @@ class TProductCardHorizontal extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         horizontal: TSizes.sm, vertical: TSizes.xs),
                     child: Text(
-                      "25%",
+                      '$salePrct%',
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!
@@ -56,11 +63,11 @@ class TProductCardHorizontal extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Positioned(
+                Positioned(
                     top: 0,
                     right: 0,
                     child: TFavouriteIcon(
-                      productId: '',
+                      productId: product.id,
                     ))
               ],
             ),
@@ -72,23 +79,42 @@ class TProductCardHorizontal extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: TSizes.sm, left: TSizes.sm),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TProductTitleText(
-                        title: "Green nike tshirt long sleeves",
+                        title: product.title,
                         smallSize: true,
                       ),
-                      SizedBox(height: TSizes.spaceBtwItems / 2),
-                      TBrandTitleWithVerification(title: "Nike")
+                      const SizedBox(height: TSizes.spaceBtwItems / 2),
+                      TBrandTitleWithVerification(title: product.brand!.name)
                     ],
                   ),
                   const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Flexible(child: TProductPriceText(price: '256')),
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (product.salePrice > 0)
+                              Text(
+                                "\$${product.price}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelMedium!
+                                    .apply(
+                                        decoration: TextDecoration.lineThrough),
+                              ),
+                            TProductPriceText(
+                              price: controller.getProductPrice(product),
+                            ),
+                          ],
+                        ),
+                      ),
                       Container(
                         decoration: const BoxDecoration(
                             color: TColors.dark,

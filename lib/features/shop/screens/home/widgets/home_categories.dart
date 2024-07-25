@@ -18,7 +18,7 @@ class THomeCategories extends StatelessWidget {
         return SizedBox(
           height: 90,
           child: Row(
-            children: List.generate(8, (index) {
+            children: List.generate(4, (index) {
               return const Row(
                 children: [
                   Column(
@@ -63,7 +63,9 @@ class THomeCategories extends StatelessWidget {
             return TVerticalImageText(
                 image: category.image,
                 title: category.name,
-                onTap: () => Get.to(() => const SubCategoriesScreen()));
+                onTap: () => Get.to(() => SubCategoriesScreen(
+                      category: category,
+                    )));
           },
         ),
       );
