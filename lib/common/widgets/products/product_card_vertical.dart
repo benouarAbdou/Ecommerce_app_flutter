@@ -1,6 +1,6 @@
 import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_image_container.dart';
-import 'package:ecommerce/common/widgets/icons/tcircular_icon.dart';
+import 'package:ecommerce/common/widgets/icons/favourite_icon.dart';
 import 'package:ecommerce/common/widgets/texts/product_price.dart';
 import 'package:ecommerce/common/widgets/texts/product_title.dart';
 import 'package:ecommerce/common/widgets/texts/tbrand_title_with_verification.dart';
@@ -12,7 +12,6 @@ import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class TProductCardVertical extends StatelessWidget {
   const TProductCardVertical({super.key, required this.product});
@@ -71,13 +70,12 @@ class TProductCardVertical extends StatelessWidget {
                           ),
                         ),
                       ),
+                      //fav
                       Positioned(
                         top: 0,
                         right: 0,
-                        child: TCircularIcon(
-                          dark: dark,
-                          icon: Iconsax.heart,
-                          color: Colors.red,
+                        child: TFavouriteIcon(
+                          productId: product.id,
                         ),
                       ),
                     ]),
