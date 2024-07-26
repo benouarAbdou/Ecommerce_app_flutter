@@ -23,7 +23,7 @@ class TCartCounterIcon extends StatelessWidget {
           onPressed: () => Get.to(() => const CartScreen()),
           icon: Icon(
             Iconsax.shopping_bag,
-            color: dark ? TColors.light : TColors.dark,
+            color: iconColor,
           ),
         ),
         Positioned(

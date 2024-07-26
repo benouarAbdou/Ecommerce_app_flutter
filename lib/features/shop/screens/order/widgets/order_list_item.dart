@@ -1,5 +1,6 @@
 import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:ecommerce/features/shop/controllers/order_controller.dart';
+import 'package:ecommerce/features/shop/screens/checkout/checkout.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/cloud_helper_functions.dart';
@@ -64,7 +65,10 @@ class TOrderListItems extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              print(order.id);
+                              Get.to(() => CheckoutScreen(order: order));
+                            },
                             icon: const Icon(
                               Icons.arrow_forward_ios,
                               size: TSizes.iconSm,

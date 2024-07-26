@@ -16,6 +16,7 @@ class TCircularImage extends StatelessWidget {
     this.width = 56,
     this.height = 56,
     this.padding = TSizes.sm,
+    this.isPfp = false,
   });
 
   final BoxFit? fit;
@@ -24,6 +25,7 @@ class TCircularImage extends StatelessWidget {
   final Color? overlayColor;
   final Color? backgroundColor;
   final double width, height, padding;
+  final bool isPfp;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,9 @@ class TCircularImage extends StatelessWidget {
         child: isNetworkImage
             ? CachedNetworkImage(
                 imageUrl: image,
-                fit: fit, // Use the fit property passed to the widget
+                fit: isPfp
+                    ? fit
+                    : null, // Use the fit property passed to the widget
                 width: width,
                 height: height,
                 color: overlayColor,
@@ -56,7 +60,9 @@ class TCircularImage extends StatelessWidget {
               )
             : Image(
                 image: AssetImage(image),
-                fit: fit, // Use the fit property passed to the widget
+                fit: isPfp
+                    ? fit
+                    : null, // Use the fit property passed to the widget
                 width: width,
                 height: height,
                 color: overlayColor,

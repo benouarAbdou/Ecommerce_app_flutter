@@ -6,7 +6,7 @@ import 'package:ecommerce/common/widgets/texts/section_heading.dart';
 import 'package:ecommerce/data/repositories/auth/auth_repo.dart';
 import 'package:ecommerce/features/personalization/screens/address/address.dart';
 import 'package:ecommerce/features/personalization/screens/profile/profile.dart';
-import 'package:ecommerce/features/shop/models/product_model.dart';
+import 'package:ecommerce/features/shop/screens/cart/cart.dart';
 import 'package:ecommerce/features/shop/screens/order/order.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
@@ -61,10 +61,11 @@ class SettingsScreen extends StatelessWidget {
                     subtitle: 'Set shipping deleviry address',
                     onTap: () => Get.to(() => const UserAddressScreen()),
                   ),
-                  const TSettingsMenuTile(
+                  TSettingsMenuTile(
                     icon: Iconsax.shopping_bag,
                     title: 'My cart',
                     subtitle: 'add , remove products from cart',
+                    onTap: () => Get.to(() => const CartScreen()),
                   ),
                   TSettingsMenuTile(
                     icon: Iconsax.bag_tick,
@@ -72,7 +73,7 @@ class SettingsScreen extends StatelessWidget {
                     subtitle: 'see your orders',
                     onTap: () => Get.to(() => const OrderScreen()),
                   ),
-                  TSettingsMenuTile(
+                  /*TSettingsMenuTile(
                     icon: Iconsax.bank,
                     title: 'bank account',
                     subtitle: 'your bank details',
@@ -128,7 +129,7 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   const SizedBox(
                     height: TSizes.spaceBtwSections,
-                  ),
+                  ),*/
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(

@@ -25,37 +25,38 @@ class TProductCardVertical extends StatelessWidget {
     final controller = ProductController.instance;
     final salePrct =
         controller.calculateSalePercentage(product.price, product.salePrice);
+    print(salePrct);
 
-    return product.title.isEmpty
-        ? const SizedBox.shrink()
-        : GestureDetector(
-            onTap: () => Get.to(() => ProductDetails(
-                  product: product,
-                )),
-            child: Container(
-              width: 180,
-              padding: const EdgeInsets.all(1),
-              decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(TSizes.productImageRadius),
-                  color: dark ? TColors.darkerGrey : TColors.white),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  //thumbnail
-                  TRoundedContainer(
-                    height: 180,
-                    padding: const EdgeInsets.all(TSizes.sm),
+    return GestureDetector(
+      onTap: () => Get.to(() => ProductDetails(
+            product: product,
+          )),
+      child: Container(
+        width: 180,
+        padding: const EdgeInsets.all(1),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(TSizes.productImageRadius),
+            color: dark ? TColors.darkerGrey : TColors.white),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            //thumbnail
+            TRoundedContainer(
+              height: 180,
+              padding: const EdgeInsets.all(TSizes.sm),
+              backgroundColor: dark ? TColors.dark : TColors.light,
+              child: Stack(children: [
+                Center(
+                  child: TRoundedImage(
+                    width: double.infinity,
                     backgroundColor: dark ? TColors.dark : TColors.light,
-                    child: Stack(children: [
-                      TRoundedImage(
-                        width: double.infinity,
-                        backgroundColor: dark ? TColors.dark : TColors.light,
-                        imageUrl: product.thumbnail,
-                        isNetworkImage: true,
-                        applyImageRadius: true,
-                      ),
-                      Positioned(
+                    imageUrl: product.thumbnail,
+                    isNetworkImage: true,
+                    applyImageRadius: true,
+                  ),
+                ),
+                salePrct != null
+                    ? Positioned(
                         top: 10,
                         child: TRoundedContainer(
                           radius: TSizes.sm,
@@ -70,78 +71,77 @@ class TProductCardVertical extends StatelessWidget {
                                 .apply(color: TColors.black),
                           ),
                         ),
-                      ),
-                      //fav
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        child: TFavouriteIcon(
-                          productId: product.id,
-                        ),
-                      ),
-                    ]),
+                      )
+                    : const SizedBox.shrink(),
+                //fav
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: TFavouriteIcon(
+                    productId: product.id,
+                  ),
+                ),
+              ]),
+            ),
+            const SizedBox(
+              height: TSizes.spaceBtwItems / 2,
+            ),
+
+            //details
+            Padding(
+              padding: const EdgeInsets.only(left: TSizes.sm),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TProductTitleText(
+                    title: product.title,
+                    smallSize: true,
                   ),
                   const SizedBox(
                     height: TSizes.spaceBtwItems / 2,
                   ),
-
-                  //details
-                  Padding(
-                    padding: const EdgeInsets.only(left: TSizes.sm),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TProductTitleText(
-                          title: product.title,
-                          smallSize: true,
-                        ),
-                        const SizedBox(
-                          height: TSizes.spaceBtwItems / 2,
-                        ),
-                        TBrandTitleWithVerification(
-                          title: product.brand!.name,
-                        ),
-                      ],
-                    ),
+                  TBrandTitleWithVerification(
+                    title: product.brand!.name,
                   ),
-                  const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (product.salePrice > 0)
-                              Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: TSizes.sm),
-                                  child: Text(
-                                    "\$${product.price}",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelMedium!
-                                        .apply(
-                                            decoration:
-                                                TextDecoration.lineThrough),
-                                  )),
-                            Padding(
-                              padding: const EdgeInsets.only(left: TSizes.sm),
-                              child: TProductPriceText(
-                                price: controller.getProductPrice(product),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      ProductCardAddToCartButton(
-                        product: product,
-                      )
-                    ],
-                  )
                 ],
               ),
             ),
-          );
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (product.salePrice > 0)
+                        Padding(
+                            padding: const EdgeInsets.only(left: TSizes.sm),
+                            child: Text(
+                              "\$${product.price}",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium!
+                                  .apply(
+                                      decoration: TextDecoration.lineThrough),
+                            )),
+                      Padding(
+                        padding: const EdgeInsets.only(left: TSizes.sm),
+                        child: TProductPriceText(
+                          price: controller.getProductPrice(product),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                ProductCardAddToCartButton(
+                  product: product,
+                )
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

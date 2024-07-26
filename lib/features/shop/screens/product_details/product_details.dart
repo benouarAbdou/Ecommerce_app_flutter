@@ -32,6 +32,7 @@ class ProductDetails extends StatelessWidget {
                   bottom: TSizes.defaultSpace,
                   left: TSizes.defaultSpace),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const TRatingAndShare(),
                   ProductMetaData(
@@ -41,16 +42,14 @@ class ProductDetails extends StatelessWidget {
                   const SizedBox(
                     height: TSizes.spaceBtwSections,
                   ),
-                  SizedBox(
+                  /*const SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Checkout'),
+                      onPressed: null,
+                      child: Text('Checkout'),
                     ),
-                  ),
-                  const SizedBox(
-                    height: TSizes.spaceBtwSections,
-                  ),
+                  ),*/
+
                   const TSectionHeader(
                     title: "Description",
                     showActionButton: false,

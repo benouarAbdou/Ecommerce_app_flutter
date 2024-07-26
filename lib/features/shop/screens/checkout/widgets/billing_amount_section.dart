@@ -1,15 +1,20 @@
 import 'package:ecommerce/features/shop/controllers/cart_controller.dart';
+import 'package:ecommerce/features/shop/models/order_model.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/pricing_calculator.dart';
 import 'package:flutter/material.dart';
 
 class TBillingAmountSection extends StatelessWidget {
-  const TBillingAmountSection({super.key});
+  const TBillingAmountSection({super.key, this.order});
+  final OrderModel? order;
 
   @override
   Widget build(BuildContext context) {
     final cartController = CartController.instance;
-    final subTotal = cartController.totalCartPrice.value;
+    final subTotal = order == null
+        ? cartController.totalCartPrice.value
+        : TPricingCalculator.calculateSubTotal(order!.totalAmount);
+    final isDetails = order != null;
     return Column(
       children: [
         Row(
@@ -20,7 +25,7 @@ class TBillingAmountSection extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
-              "\$$subTotal",
+              "\$${subTotal.toStringAsFixed(2)}",
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],

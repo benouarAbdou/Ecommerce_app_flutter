@@ -19,6 +19,7 @@ class TUserProfileTile extends StatelessWidget {
         image: controller.user.value.profilePicture,
         isNetworkImage: true,
         padding: 0,
+        isPfp: true,
       ),
       title: Text(
         controller.user.value.fullName,

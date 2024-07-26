@@ -29,36 +29,47 @@ class ProductMetaData extends StatelessWidget {
         //price
         Row(
           children: [
-            TRoundedContainer(
-              radius: TSizes.sm,
-              backgroundColor: TColors.secondary.withOpacity(0.8),
-              padding: const EdgeInsets.symmetric(
-                  horizontal: TSizes.sm, vertical: TSizes.xs),
-              child: Text(
-                '$salePrct%',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .apply(color: TColors.black),
-              ),
+            salePrct == null
+                ? const SizedBox.shrink()
+                : TRoundedContainer(
+                    radius: TSizes.sm,
+                    backgroundColor: TColors.secondary.withOpacity(0.8),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: TSizes.sm, vertical: TSizes.xs),
+                    child: Text(
+                      '$salePrct%',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .apply(color: TColors.black),
+                    ),
+                  ),
+            SizedBox(
+              width: salePrct == null ? 0 : TSizes.spaceBtwItems,
             ),
-            const SizedBox(
-              width: TSizes.spaceBtwItems,
-            ),
-            Text(
-              "\$${product.price}",
-              style: Theme.of(context)
-                  .textTheme
-                  .titleSmall!
-                  .apply(decoration: TextDecoration.lineThrough),
-            ),
-            const SizedBox(
-              width: TSizes.spaceBtwItems,
-            ),
-            TProductPriceText(
-              price: "${product.salePrice}",
-              isLarge: true,
-            )
+            salePrct == null
+                ? TProductPriceText(
+                    price: "${product.price}",
+                    isLarge: true,
+                  )
+                : Row(
+                    children: [
+                      Text(
+                        "\$${product.price}",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall!
+                            .apply(decoration: TextDecoration.lineThrough),
+                      ),
+                      const SizedBox(
+                        width: TSizes.spaceBtwItems,
+                      ),
+                      TProductPriceText(
+                        price: "${product.salePrice}",
+                        isLarge: true,
+                      )
+                    ],
+                  ),
           ],
         ),
         const SizedBox(

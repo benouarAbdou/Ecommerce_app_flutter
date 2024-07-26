@@ -25,6 +25,17 @@ class TPricingCalculator {
     return taxAmount.toStringAsFixed(2);
   }
 
+  static double calculateSubTotal(double total) {
+    double taxRate = getTaxRateForLocation("US");
+    double shippingCost = getShippingCost("US");
+
+    // Calculate the subtotal
+    double subTotal = total - taxRate - shippingCost;
+
+    // Return the subtotal as a string formatted to 2 decimal places
+    return subTotal;
+  }
+
   static double getTaxRateForLocation(String location) {
     // Lookup the tax rate for the given location from a tax rate database or API.
     // Return the appropriate tax rate.

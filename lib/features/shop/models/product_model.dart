@@ -80,21 +80,21 @@ class ProductModel {
     final firestore = FirebaseFirestore.instance;
 
     final dummyProduct = ProductModel(
-      id: '03',
-      title: 'Leather Jacket',
-      stock: 100,
-      price: 210.99,
+      id: '04',
+      title: 'Beasball bat',
+      stock: 11,
+      price: 39.99,
       thumbnail:
-          'https://firebasestorage.googleapis.com/v0/b/ecommerce-b06c5.appspot.com/o/Products%2Fleather_jacket_1.png?alt=media&token=149375c5-50d2-491c-aa17-df51704a7421',
-      sku: 'SKU123457',
-      salePrice: 200.99,
+          'https://firebasestorage.googleapis.com/v0/b/ecommerce-b06c5.appspot.com/o/Products%2Fbaseball_bat.png?alt=media&token=f35c3447-2f4b-4a7f-984f-05bea814f81d',
+      sku: 'SKU123458',
+      salePrice: 0,
       isFeatured: true,
       categoryId: '1',
       description: 'This is a dummy product for testing purposes.',
       brand: BrandModel(
-        id: '3',
-        name: 'Zara',
-        image: 'assets/icons/brands/zara-logo.png',
+        id: '2',
+        name: 'Adidas',
+        image: 'assets/icons/brands/adidas-logo.png',
         isFeatured: true,
         productsCount: 199,
       ),
@@ -104,7 +104,7 @@ class ProductModel {
     try {
       await firestore
           .collection('Products')
-          .doc('03')
+          .doc('04')
           .set(dummyProduct.toJson());
       print('Dummy product uploaded successfully!');
     } catch (e) {

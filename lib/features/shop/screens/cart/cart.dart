@@ -3,6 +3,8 @@ import 'package:ecommerce/features/shop/controllers/cart_controller.dart';
 
 import 'package:ecommerce/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:ecommerce/features/shop/screens/checkout/checkout.dart';
+import 'package:ecommerce/navigation_menu.dart';
+import 'package:ecommerce/utils/constants/colors.dart';
 
 import 'package:ecommerce/utils/constants/sizes.dart';
 
@@ -23,15 +25,35 @@ class CartScreen extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
-      body: /*Obx(() {
-        return*/
-          const SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(TSizes.defaultSpace),
-          child: CartItems(),
-        ),
-      ), //;
-      //}),
+      body: Obx(() {
+        return controller.cartItems.isEmpty
+            ? Center(
+                child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("There is no item in the cart"),
+                  const SizedBox(
+                    height: TSizes.spaceBtwItems,
+                  ),
+                  SizedBox(
+                    width: 150,
+                    child: ElevatedButton(
+                        onPressed: () => Get.off(() => const NavigationMenu()),
+                        child: Text("Add item",
+                            style:
+                                Theme.of(context).textTheme.bodyMedium!.apply(
+                                      color: TColors.white,
+                                    ))),
+                  )
+                ],
+              ))
+            : const SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(TSizes.defaultSpace),
+                  child: CartItems(),
+                ),
+              ); //;
+      }),
       bottomNavigationBar: controller.cartItems.isEmpty
           ? const SizedBox()
           : Padding(
