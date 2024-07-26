@@ -1,16 +1,17 @@
 import 'package:ecommerce/common/widgets/appbar/appbar.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:ecommerce/common/widgets/products/coupon_code.dart';
-import 'package:ecommerce/common/widgets/success_screen/success_screen.dart';
+import 'package:ecommerce/features/shop/controllers/cart_controller.dart';
+import 'package:ecommerce/features/shop/controllers/order_controller.dart';
 import 'package:ecommerce/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:ecommerce/features/shop/screens/checkout/widgets/billing_address_section.dart';
 import 'package:ecommerce/features/shop/screens/checkout/widgets/billing_amount_section.dart';
 import 'package:ecommerce/features/shop/screens/checkout/widgets/billing_payement_section.dart';
-import 'package:ecommerce/navigation_menu.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
-import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helper_functions.dart';
+import 'package:ecommerce/utils/helpers/pricing_calculator.dart';
+import 'package:ecommerce/utils/popups/loaders.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,6 +21,10 @@ class CheckoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
+    final cartController = CartController.instance;
+    final subTotal = cartController.totalCartPrice.value;
+    final orderController = Get.put(OrderController());
+    final totalAmount = TPricingCalculator.calculateTotalPrice(subTotal, "US");
     return Scaffold(
       appBar: TAppBar(
         showBackArrow: true,
@@ -65,13 +70,11 @@ class CheckoutScreen extends StatelessWidget {
             left: TSizes.defaultSpace,
             right: TSizes.defaultSpace),
         child: ElevatedButton(
-            onPressed: (() => Get.to(() => SuccessScreen(
-                  image: TImages.successfulPaymentIcon,
-                  title: 'Payemnt success',
-                  subtitle: 'Your item will be shipped soon',
-                  onPressed: () => Get.offAll(() => const NavigationMenu()),
-                ))),
-            child: const Text('Checkout \$255.0')),
+            onPressed: subTotal > 0
+                ? () => orderController.processOrder(totalAmount)
+                : TLoaders.warningSnackBar(
+                    title: 'Empty Cart', message: "Add items to the cart"),
+            child: Text('Checkout \$${totalAmount.toStringAsFixed(2)}')),
       ),
     );
   }

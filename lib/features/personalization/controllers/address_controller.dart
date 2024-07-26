@@ -1,6 +1,11 @@
+import 'package:ecommerce/common/widgets/texts/section_heading.dart';
 import 'package:ecommerce/data/repositories/address/address_repo.dart';
 import 'package:ecommerce/features/personalization/models/address_model.dart';
+import 'package:ecommerce/features/personalization/screens/address/add_new_address.dart';
+import 'package:ecommerce/features/personalization/screens/address/widgets/single_address.dart';
 import 'package:ecommerce/utils/constants/image_strings.dart';
+import 'package:ecommerce/utils/constants/sizes.dart';
+import 'package:ecommerce/utils/helpers/cloud_helper_functions.dart';
 import 'package:ecommerce/utils/network/networkManager.dart';
 import 'package:ecommerce/utils/popups/loaders.dart';
 import 'package:flutter/material.dart';
@@ -113,6 +118,51 @@ class AddressController extends GetxController {
       TLoaders.errorSnackBar(title: 'Address not found', message: e.toString());
       print(e.toString());
     }
+  }
+
+  Future<dynamic> selectNewAddressPopup(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(TSizes.lg),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const TSectionHeader(
+                title: "Select Address", showActionButton: false),
+            FutureBuilder(
+              future: allUserAddresses(),
+              builder: (context, snapshot) {
+                /// Helper Function: Handle Loader, No Record, OR ERROR Message
+                final response = TCloudHelperFunctions.checkMultiRecordState(
+                    snapshot: snapshot);
+                if (response != null) return response;
+
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) => TSingleAddress(
+                    address: snapshot.data![index],
+                    onTap: () async {
+                      await selectAddress(snapshot.data![index]);
+                      Get.back();
+                    },
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: TSizes.defaultSpace * 2),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => Get.to(() => const AddNewAddressScreen()),
+                child: const Text('Add new address'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   /// Function to reset form fields
