@@ -6,6 +6,7 @@ import 'package:ecommerce/common/widgets/texts/product_title.dart';
 import 'package:ecommerce/common/widgets/texts/tbrand_title_with_verification.dart';
 import 'package:ecommerce/features/shop/controllers/product_controller.dart';
 import 'package:ecommerce/features/shop/models/product_model.dart';
+import 'package:ecommerce/features/shop/screens/home/widgets/product_card_add_to_cart_button.dart';
 import 'package:ecommerce/features/shop/screens/product_details/product_details.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
@@ -133,23 +134,8 @@ class TProductCardVertical extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Container(
-                        decoration: const BoxDecoration(
-                            color: TColors.dark,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(TSizes.cardRadiusMd),
-                              bottomRight:
-                                  Radius.circular(TSizes.productImageRadius),
-                            )),
-                        child: const SizedBox(
-                            width: TSizes.iconLg * 1.2,
-                            height: TSizes.iconLg * 1.2,
-                            child: Center(
-                              child: Icon(
-                                Icons.add,
-                                color: TColors.white,
-                              ),
-                            )),
+                      ProductCardAddToCartButton(
+                        product: product,
                       )
                     ],
                   )

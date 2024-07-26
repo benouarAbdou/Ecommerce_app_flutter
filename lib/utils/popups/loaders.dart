@@ -91,4 +91,26 @@ class TLoaders {
       icon: const Icon(Iconsax.warning_2, color: TColors.white),
     );
   }
+
+  static customSnackBar({required String message, Duration? duration}) {
+    Get.showSnackbar(
+      GetSnackBar(
+        message: message,
+        duration: duration ?? const Duration(seconds: 3),
+        backgroundColor: Colors.grey[300]!, // Light grey background
+        messageText: Text(
+          message,
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 12, // Small text size
+          ),
+        ),
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(10),
+        borderRadius: 8,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        isDismissible: true,
+      ),
+    );
+  }
 }

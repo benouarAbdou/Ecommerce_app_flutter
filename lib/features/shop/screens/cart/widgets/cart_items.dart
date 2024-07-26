@@ -1,8 +1,10 @@
 import 'package:ecommerce/common/widgets/products/quantity_add_remove.dart';
 import 'package:ecommerce/common/widgets/texts/product_price.dart';
+import 'package:ecommerce/features/shop/controllers/cart_controller.dart';
 import 'package:ecommerce/features/shop/screens/cart/widgets/cart_item.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CartItems extends StatelessWidget {
   const CartItems({
@@ -14,33 +16,50 @@ class CartItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-        shrinkWrap: true,
-        itemBuilder: (_, index) => Column(
-              children: [
-                const TCartItem(),
-                if (showAddRemoveButtons)
-                  const SizedBox(height: TSizes.spaceBtwItems),
-                if (showAddRemoveButtons)
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+    final cartController = CartController.instance;
+
+    return Obx(
+      () => ListView.separated(
+          shrinkWrap: true,
+          itemBuilder: (_, index) => Obx(() {
+                final item = cartController.cartItems[index];
+                return Column(
+                  children: [
+                    TCartItem(
+                      cartItem: item,
+                    ),
+                    if (showAddRemoveButtons)
+                      const SizedBox(height: TSizes.spaceBtwItems),
+                    if (showAddRemoveButtons)
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(
-                            width: 70,
+                          Row(
+                            children: [
+                              const SizedBox(
+                                width: 70,
+                              ),
+                              QuantityAddRemove(
+                                quantity: item.quantity,
+                                add: () => cartController.addOneToCart(item),
+                                remove: () =>
+                                    cartController.removeOneFromCart(item),
+                              ),
+                            ],
                           ),
-                          QuantityAddRemove(),
+                          TProductPriceText(
+                            price:
+                                (item.price * item.quantity).toStringAsFixed(1),
+                          )
                         ],
-                      ),
-                      TProductPriceText(price: '155')
-                    ],
-                  )
-              ],
-            ),
-        separatorBuilder: (_, __) => const SizedBox(
-              height: TSizes.spaceBtwSections,
-            ),
-        itemCount: 2);
+                      )
+                  ],
+                );
+              }),
+          separatorBuilder: (_, __) => const SizedBox(
+                height: TSizes.spaceBtwSections,
+              ),
+          itemCount: cartController.cartItems.length),
+    );
   }
 }
