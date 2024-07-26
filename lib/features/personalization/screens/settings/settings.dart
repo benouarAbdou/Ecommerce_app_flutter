@@ -19,7 +19,6 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProductModel product;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

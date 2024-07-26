@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class TCircularImage extends StatelessWidget {
   const TCircularImage({
     super.key,
-    this.fit = BoxFit.contain, // Changed from BoxFit.cover to BoxFit.contain
+    this.fit = BoxFit.cover, // Changed from BoxFit.cover to BoxFit.contain
     required this.image,
     this.isNetworkImage = true,
     this.overlayColor,
@@ -43,8 +43,8 @@ class TCircularImage extends StatelessWidget {
             ? CachedNetworkImage(
                 imageUrl: image,
                 fit: fit, // Use the fit property passed to the widget
-                width: width - 2 * padding,
-                height: height - 2 * padding,
+                width: width,
+                height: height,
                 color: overlayColor,
                 progressIndicatorBuilder: (context, url, progress) =>
                     const TShimmerEffect(
@@ -57,8 +57,8 @@ class TCircularImage extends StatelessWidget {
             : Image(
                 image: AssetImage(image),
                 fit: fit, // Use the fit property passed to the widget
-                width: width - 2 * padding,
-                height: height - 2 * padding,
+                width: width,
+                height: height,
                 color: overlayColor,
               ),
       ),
