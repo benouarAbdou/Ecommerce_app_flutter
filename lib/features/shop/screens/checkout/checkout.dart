@@ -62,7 +62,7 @@ class CheckoutScreen extends StatelessWidget {
                     const SizedBox(height: TSizes.spaceBtwItems),
                     TBillingPayementSection(order: order),
                     const SizedBox(height: TSizes.spaceBtwItems),
-                    const TBillingAddressSection()
+                    TBillingAddressSection(order: order)
                   ],
                 ),
               )

@@ -1,30 +1,37 @@
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
 import 'package:ecommerce/features/personalization/controllers/address_controller.dart';
+import 'package:ecommerce/features/shop/models/order_model.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TBillingAddressSection extends StatelessWidget {
-  const TBillingAddressSection({super.key});
+  const TBillingAddressSection({super.key, this.order});
+
+  final OrderModel? order;
 
   @override
   Widget build(BuildContext context) {
     final addressController = AddressController.instance;
+    final isDetails = order != null;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TSectionHeader(
+          showActionButton: !isDetails,
           title: 'Shipping address',
           buttonTitle: 'Change',
           onPressed: () => addressController.selectNewAddressPopup(context),
         ),
-        addressController.selectedAddress.value.id.isNotEmpty
+        addressController.selectedAddress.value.id.isNotEmpty || !isDetails
             ? Obx(
                 () => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      addressController.selectedAddress.value.name,
+                      isDetails
+                          ? order!.address!.name
+                          : addressController.selectedAddress.value.name,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     const SizedBox(height: TSizes.spaceBtwItems / 2),
@@ -37,7 +44,10 @@ class TBillingAddressSection extends StatelessWidget {
                         ),
                         const SizedBox(height: TSizes.spaceBtwItems),
                         Text(
-                          addressController.selectedAddress.value.phoneNumber,
+                          isDetails
+                              ? order!.address!.phoneNumber
+                              : addressController
+                                  .selectedAddress.value.phoneNumber,
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],
@@ -52,7 +62,10 @@ class TBillingAddressSection extends StatelessWidget {
                         ),
                         const SizedBox(height: TSizes.spaceBtwItems),
                         Text(
-                          addressController.selectedAddress.value.toString(),
+                          isDetails
+                              ? order!.address!.toString()
+                              : addressController.selectedAddress.value
+                                  .toString(),
                           style: Theme.of(context).textTheme.bodyMedium,
                           softWrap: true,
                         ),

@@ -259,4 +259,27 @@ class TImages {
   static const String paytm = "assets/icons/payment_methods/paytm.png";
   static const String successfulPaymentIcon =
       "assets/icons/payment_methods/successful_payment_icon.png";
+
+  static String getPaymentMethodImage(String methodName) {
+    switch (methodName.toLowerCase().replaceAll(' ', '')) {
+      case 'applepay':
+        return applePay;
+      case 'googlepay':
+        return googlePay;
+      case 'creditcard':
+        return creditCard;
+      case 'mastercard':
+        return masterCard;
+      case 'paypal':
+        return paypal;
+      case 'visa':
+        return visa;
+      case 'paystack':
+        return paystack;
+      case 'paytm':
+        return paytm;
+      default:
+        return successfulPaymentIcon; // Default icon or handle unknown method
+    }
+  }
 }

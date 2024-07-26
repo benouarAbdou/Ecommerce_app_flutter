@@ -12,6 +12,8 @@ class CheckoutController extends GetxController {
   final Rx<PayementMethodModel> selectedPayementMethod =
       PayementMethodModel.empty().obs;
 
+  RxInt h = 0.obs;
+
   @override
   void onInit() {
     // TODO: implement onInit

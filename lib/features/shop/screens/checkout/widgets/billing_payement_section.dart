@@ -3,6 +3,7 @@ import 'package:ecommerce/common/widgets/texts/section_heading.dart';
 import 'package:ecommerce/features/shop/controllers/checkout_controller.dart';
 import 'package:ecommerce/features/shop/models/order_model.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
+import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,8 +29,9 @@ class TBillingPayementSection extends StatelessWidget {
           onPressed: () => controller.selectPaymentMethod(context),
         ),
         const SizedBox(height: TSizes.spaceBtwItems / 2),
-        Obx(
-          () => Row(
+        Obx(() {
+          int h = controller.h.value;
+          return Row(
             children: [
               TRoundedContainer(
                 width: 60,
@@ -37,8 +39,12 @@ class TBillingPayementSection extends StatelessWidget {
                 backgroundColor: dark ? TColors.light : TColors.white,
                 padding: const EdgeInsets.all(TSizes.sm),
                 child: Image(
-                  image:
-                      AssetImage(controller.selectedPayementMethod.value.image),
+                  image: AssetImage(
+                    isDetails
+                        ? TImages.getPaymentMethodImage(order!.paymentMethod)
+                        : TImages.getPaymentMethodImage(
+                            controller.selectedPayementMethod.value.name),
+                  ),
                   fit: BoxFit.contain,
                 ),
               ),
@@ -50,8 +56,8 @@ class TBillingPayementSection extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             ],
-          ),
-        )
+          );
+        })
       ],
     );
   }
