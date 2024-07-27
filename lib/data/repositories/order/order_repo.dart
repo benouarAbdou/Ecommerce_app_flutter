@@ -25,7 +25,6 @@ class OrderRepository extends GetxController {
           .map((documentSnapshot) => OrderModel.fromSnapshot(documentSnapshot))
           .toList();
     } catch (e) {
-      print(e);
       rethrow;
     }
   }

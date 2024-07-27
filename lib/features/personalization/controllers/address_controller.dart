@@ -28,6 +28,13 @@ class AddressController extends GetxController {
 
   RxBool refreshData = true.obs;
 
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    allUserAddresses();
+    super.onInit();
+  }
+
   Future<List<AddressModel>> allUserAddresses() async {
     try {
       final addresses = await addressRepo.fetchUserAddresses();
@@ -116,7 +123,6 @@ class AddressController extends GetxController {
       // Remove Loader
       TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Address not found', message: e.toString());
-      print(e.toString());
     }
   }
 

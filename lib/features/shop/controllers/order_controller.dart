@@ -5,6 +5,7 @@ import 'package:ecommerce/features/personalization/controllers/address_controlle
 import 'package:ecommerce/features/shop/controllers/cart_controller.dart';
 import 'package:ecommerce/features/shop/controllers/checkout_controller.dart';
 import 'package:ecommerce/features/shop/models/order_model.dart';
+import 'package:ecommerce/features/shop/screens/checkout/checkout.dart';
 import 'package:ecommerce/navigation_menu.dart';
 import 'package:ecommerce/utils/constants/enums.dart';
 import 'package:ecommerce/utils/constants/image_strings.dart';
@@ -32,7 +33,7 @@ class OrderController extends GetxController {
   }
 
   /// Process order
-  void processOrder(double totalAmount) async {
+  void processOrder(double totalAmount, bool isNotEmpty) async {
     try {
       // Start Loader
       TFullScreenLoader.openLoadingDialog(
@@ -41,6 +42,14 @@ class OrderController extends GetxController {
       // Get user authentication Id
       final userId = AuthenticationRepository.instance.authUser!.uid;
       if (userId.isEmpty) return;
+
+      if (!isNotEmpty) {
+        TFullScreenLoader.stopLoading();
+
+        Get.off(() => const CheckoutScreen());
+        TLoaders.errorSnackBar(title: "Add your address");
+        return;
+      }
 
       // Create order
       final order = OrderModel(

@@ -69,7 +69,7 @@ class CategoryController extends GetxController {
       return products;
     } catch (e) {
       TLoaders.errorSnackBar(title: "Oh Snap!", message: e.toString());
-      print(e.toString());
+
       return [];
     }
   }

@@ -106,10 +106,7 @@ class ProductModel {
           .collection('Products')
           .doc('04')
           .set(dummyProduct.toJson());
-      print('Dummy product uploaded successfully!');
-    } catch (e) {
-      print('Error uploading dummy product: $e');
-    }
+    } catch (e) {}
   }
 
   factory ProductModel.fromQuerySnapshot(

@@ -14,6 +14,7 @@ class TBillingAddressSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final addressController = AddressController.instance;
     final isDetails = order != null;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -23,61 +24,55 @@ class TBillingAddressSection extends StatelessWidget {
           buttonTitle: 'Change',
           onPressed: () => addressController.selectNewAddressPopup(context),
         ),
-        addressController.selectedAddress.value.id.isNotEmpty || !isDetails
-            ? Obx(
-                () => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        Obx(() {
+          print(addressController.selectedAddress.value.id);
+          if (addressController.selectedAddress.value.id.isNotEmpty ||
+              isDetails) {
+            final address = isDetails
+                ? order!.address!
+                : addressController.selectedAddress.value;
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  address.name,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const SizedBox(height: TSizes.spaceBtwItems / 2),
+                Row(
                   children: [
+                    const Icon(Icons.phone, color: Colors.grey, size: 16),
+                    const SizedBox(width: TSizes.spaceBtwItems),
                     Text(
-                      isDetails
-                          ? order!.address!.name
-                          : addressController.selectedAddress.value.name,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    const SizedBox(height: TSizes.spaceBtwItems / 2),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.phone,
-                          color: Colors.grey,
-                          size: 16,
-                        ),
-                        const SizedBox(height: TSizes.spaceBtwItems),
-                        Text(
-                          isDetails
-                              ? order!.address!.phoneNumber
-                              : addressController
-                                  .selectedAddress.value.phoneNumber,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: TSizes.spaceBtwItems / 2),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.location_history,
-                          color: Colors.grey,
-                          size: 16,
-                        ),
-                        const SizedBox(height: TSizes.spaceBtwItems),
-                        Text(
-                          isDetails
-                              ? order!.address!.toString()
-                              : addressController.selectedAddress.value
-                                  .toString(),
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          softWrap: true,
-                        ),
-                      ],
+                      address.phoneNumber,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),
-              )
-            : Text(
-                "Select address",
-                style: Theme.of(context).textTheme.bodyMedium,
-              )
+                const SizedBox(height: TSizes.spaceBtwItems / 2),
+                Row(
+                  children: [
+                    const Icon(Icons.location_history,
+                        color: Colors.grey, size: 16),
+                    const SizedBox(width: TSizes.spaceBtwItems),
+                    Expanded(
+                      child: Text(
+                        address.toString(),
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        softWrap: true,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          } else {
+            return Text(
+              "Select address",
+              style: Theme.of(context).textTheme.bodyMedium,
+            );
+          }
+        }),
       ],
     );
   }

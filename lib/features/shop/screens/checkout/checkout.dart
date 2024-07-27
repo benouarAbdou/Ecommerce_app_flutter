@@ -1,6 +1,6 @@
 import 'package:ecommerce/common/widgets/appbar/appbar.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:ecommerce/common/widgets/products/coupon_code.dart';
+import 'package:ecommerce/features/personalization/controllers/address_controller.dart';
 import 'package:ecommerce/features/shop/controllers/cart_controller.dart';
 import 'package:ecommerce/features/shop/controllers/order_controller.dart';
 import 'package:ecommerce/features/shop/models/order_model.dart';
@@ -26,6 +26,8 @@ class CheckoutScreen extends StatelessWidget {
     final dark = THelperFunctions.isDarkMode(context);
     final cartController = CartController.instance;
     final subTotal = cartController.totalCartPrice.value;
+    final addressController = AddressController.instance;
+
     final orderController = Get.put(OrderController());
     final totalAmount = TPricingCalculator.calculateTotalPrice(subTotal, "US");
     return Scaffold(
@@ -45,11 +47,11 @@ class CheckoutScreen extends StatelessWidget {
                 showAddRemoveButtons: false,
                 order: order,
               ),
-              order == null
-                  ? const SizedBox(height: TSizes.spaceBtwSections)
-                  : const SizedBox.shrink(),
-              order == null ? const TCouponCode() : const SizedBox.shrink(),
+
               const SizedBox(height: TSizes.spaceBtwSections),
+
+              ////order == null ? const TCouponCode() : const SizedBox.shrink(),
+              //const SizedBox(height: TSizes.spaceBtwSections),
               TRoundedContainer(
                 padding: const EdgeInsets.all(TSizes.md),
                 showBorder: true,
@@ -78,7 +80,8 @@ class CheckoutScreen extends StatelessWidget {
                   right: TSizes.defaultSpace),
               child: ElevatedButton(
                   onPressed: subTotal > 0
-                      ? () => orderController.processOrder(totalAmount)
+                      ? () => orderController.processOrder(totalAmount,
+                          addressController.selectedAddress.value.id.isNotEmpty)
                       : TLoaders.warningSnackBar(
                           title: 'Empty Cart',
                           message: "Add items to the cart"),

@@ -25,7 +25,6 @@ class TProductCardVertical extends StatelessWidget {
     final controller = ProductController.instance;
     final salePrct =
         controller.calculateSalePercentage(product.price, product.salePrice);
-    print(salePrct);
 
     return GestureDetector(
       onTap: () => Get.to(() => ProductDetails(

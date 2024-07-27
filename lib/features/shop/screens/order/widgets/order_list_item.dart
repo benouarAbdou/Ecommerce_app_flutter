@@ -66,7 +66,6 @@ class TOrderListItems extends StatelessWidget {
                         ),
                         IconButton(
                             onPressed: () {
-                              print(order.id);
                               Get.to(() => CheckoutScreen(order: order));
                             },
                             icon: const Icon(
