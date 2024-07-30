@@ -34,6 +34,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      title: "Ecommerce",
       initialBinding: GeneralBindings(),
       themeMode: ThemeMode.system,
       theme: EcommerceTheme.lightTheme,

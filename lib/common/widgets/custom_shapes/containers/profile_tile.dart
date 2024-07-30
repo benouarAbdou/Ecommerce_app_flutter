@@ -1,6 +1,7 @@
 import 'package:ecommerce/common/widgets/custom_shapes/containers/tcircular_image.dart';
 import 'package:ecommerce/features/personalization/controllers/user_controller.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
+import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 
 class TUserProfileTile extends StatelessWidget {
@@ -14,10 +15,11 @@ class TUserProfileTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = UserController.instance;
+    final isPfpSet = controller.user.value.profilePicture.isNotEmpty;
     return ListTile(
       leading: TCircularImage(
-        image: controller.user.value.profilePicture,
-        isNetworkImage: true,
+        image: isPfpSet ? controller.user.value.profilePicture : TImages.user,
+        isNetworkImage: isPfpSet,
         padding: 0,
         isPfp: true,
       ),
